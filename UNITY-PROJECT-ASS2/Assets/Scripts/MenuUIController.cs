@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MenuUIController : MonoBehaviour
@@ -7,20 +8,28 @@ public class MenuUIController : MonoBehaviour
 
     public void OnPlayClicked()
     {
-        titleText.text = "Play button clicked";
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Gameplay");
     }
 
     public void OnOptionsClicked()
     {
-        titleText.text = "Options button clicked";
+        if (titleText != null)
+        {
+            titleText.text = "Options clicked";
+        }
+
+        Debug.Log("Options clicked");
     }
 
     public void OnQuitClicked()
     {
-        titleText.text = "Quit button clicked";
+        Debug.Log("Quit clicked");
 
-        Debug.Log("Quit button clicked");
-
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
