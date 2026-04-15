@@ -6,23 +6,20 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
-	
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform ground_check;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Animator animator; // <-- add this
-	
+
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-		animator.SetBool("isMoving", Mathf.Abs(horizontal) > 0.1f);
-		
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            SoundManager.instance.PlayJumpSound();
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0.2f)
