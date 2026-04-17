@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     public AudioClip jumpSound;
+    public AudioClip moveSound;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -33,6 +34,14 @@ public class SoundManager : MonoBehaviour
         if (jumpSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(jumpSound);
+        }
+    }
+
+    public void PlayMoveSound()
+    {
+        if (moveSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(moveSound);
         }
     }
 }

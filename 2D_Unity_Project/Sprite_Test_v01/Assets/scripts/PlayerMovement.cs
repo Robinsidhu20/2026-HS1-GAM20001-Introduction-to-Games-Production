@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Animator animator;
+    [SerializeField] private float moveSoundInterval = 0.25f;
+
+    private float nextMoveSoundTime;
 
     private void Awake()
     {
@@ -40,6 +43,15 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded())
         {
             canJump = true;
+        }
+
+        if (Mathf.Abs(horizontal) > 0f && isGrounded() && Time.time >= nextMoveSoundTime)
+        {
+            nextMoveSoundTime = Time.time + moveSoundInterval;
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.PlayMoveSound();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
