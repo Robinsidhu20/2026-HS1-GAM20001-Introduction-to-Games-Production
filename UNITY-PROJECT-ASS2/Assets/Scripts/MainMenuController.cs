@@ -7,6 +7,9 @@ public class MainMenuController : MonoBehaviour
     public GameObject settingsPanel;
     public Slider volumeSlider;
 
+    public AudioSource sfxSource;
+    public AudioClip buttonClickClip;
+
     void Start()
     {
         if (volumeSlider != null)
@@ -15,14 +18,25 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    void PlayButtonClickSound()
+    {
+        if (sfxSource != null && buttonClickClip != null)
+        {
+            sfxSource.PlayOneShot(buttonClickClip);
+        }
+    }
+
     public void OnPlayClicked()
     {
+        PlayButtonClickSound();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Gameplay");
     }
 
     public void OnOptionsClicked()
     {
+        PlayButtonClickSound();
+
         if (settingsPanel != null)
         {
             settingsPanel.SetActive(true);
@@ -33,6 +47,8 @@ public class MainMenuController : MonoBehaviour
 
     public void OnCloseSettingsClicked()
     {
+        PlayButtonClickSound();
+
         if (settingsPanel != null)
         {
             settingsPanel.SetActive(false);
@@ -41,6 +57,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnToggleFullscreenClicked()
     {
+        PlayButtonClickSound();
         Screen.fullScreen = !Screen.fullScreen;
         Debug.Log("Fullscreen toggled");
     }
@@ -53,6 +70,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnQuitClicked()
     {
+        PlayButtonClickSound();
         Debug.Log("Quit clicked");
 
 #if UNITY_EDITOR

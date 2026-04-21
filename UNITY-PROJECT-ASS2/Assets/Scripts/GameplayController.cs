@@ -11,6 +11,9 @@ public class GameplayController : MonoBehaviour
     public GameObject pauseCanvas;
     public TMP_Text pauseStatusText;
 
+    public AudioSource sfxSource;
+    public AudioClip spawnClip;
+
     private List<GameObject> createdObjects = new List<GameObject>();
     private bool isVisible = true;
     private bool isPaused = false;
@@ -46,6 +49,14 @@ public class GameplayController : MonoBehaviour
         }
     }
 
+    void PlaySpawnSound()
+    {
+        if (sfxSource != null && spawnClip != null)
+        {
+            sfxSource.PlayOneShot(spawnClip);
+        }
+    }
+
     void ToggleObjectVisibility()
     {
         if (targetObject != null)
@@ -63,6 +74,7 @@ public class GameplayController : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
             GameObject newObject = Instantiate(coroutinePrefab, spawnPosition, Quaternion.identity);
             createdObjects.Add(newObject);
+            PlaySpawnSound();
             Debug.Log("Created coroutine self-destruct object");
         }
     }
@@ -74,6 +86,7 @@ public class GameplayController : MonoBehaviour
             Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
             GameObject newObject = Instantiate(countdownPrefab, spawnPosition, Quaternion.identity);
             createdObjects.Add(newObject);
+            PlaySpawnSound();
             Debug.Log("Created countdown self-destruct object");
         }
     }
