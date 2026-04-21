@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameplayController : MonoBehaviour
@@ -127,6 +128,12 @@ public class GameplayController : MonoBehaviour
         }
 
         Debug.Log("Pause menu options clicked");
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
