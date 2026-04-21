@@ -6,7 +6,8 @@ using TMPro;
 public class GameplayController : MonoBehaviour
 {
     public GameObject targetObject;
-    public GameObject prefabToCreate;
+    public GameObject coroutinePrefab;
+    public GameObject countdownPrefab;
     public GameObject pauseCanvas;
     public TMP_Text pauseStatusText;
 
@@ -30,7 +31,12 @@ public class GameplayController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                CreateObject();
+                CreateCoroutineObject();
+            }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                CreateCountdownObject();
             }
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -50,14 +56,25 @@ public class GameplayController : MonoBehaviour
         }
     }
 
-    void CreateObject()
+    void CreateCoroutineObject()
     {
-        if (prefabToCreate != null)
+        if (coroutinePrefab != null)
         {
             Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
-            GameObject newObject = Instantiate(prefabToCreate, spawnPosition, Quaternion.identity);
+            GameObject newObject = Instantiate(coroutinePrefab, spawnPosition, Quaternion.identity);
             createdObjects.Add(newObject);
-            Debug.Log("Created new object");
+            Debug.Log("Created coroutine self-destruct object");
+        }
+    }
+
+    void CreateCountdownObject()
+    {
+        if (countdownPrefab != null)
+        {
+            Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(-2f, 2f), 0f);
+            GameObject newObject = Instantiate(countdownPrefab, spawnPosition, Quaternion.identity);
+            createdObjects.Add(newObject);
+            Debug.Log("Created countdown self-destruct object");
         }
     }
 

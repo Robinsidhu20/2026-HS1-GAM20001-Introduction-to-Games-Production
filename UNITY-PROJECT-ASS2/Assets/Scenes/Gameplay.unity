@@ -252,7 +252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayController
   targetObject: {fileID: 6916015546259771647}
-  prefabToCreate: {fileID: 3023987288712681624, guid: fc203f411c4191d4991676aa6a24bfa5, type: 3}
+  coroutinePrefab: {fileID: 5002045549794561121, guid: efc1668ff3f9a89489ec775aef7ee0c8, type: 3}
+  countdownPrefab: {fileID: 6983237112271005567, guid: 62ff9ec1cbb6a094a93ac578286dfc15, type: 3}
   pauseCanvas: {fileID: 175444414}
   pauseStatusText: {fileID: 654595900}
 --- !u!4 &229506650
